@@ -1,24 +1,22 @@
 # @sellerartifact/sequelize-tool
 
+## 简介
 
+该项目包含一些实用的 sequelize 查询帮助函数，用于处理对象过滤、SQL 查询生成和字段条件渲染。
 
-## Introduction
-
-This project includes some practical `sequencize query helper functions` for processing object filtering, SQL query generation, and field condition rendering.
-
-## Install
+## 安装
 
 ```
 npm install --save @sellerartifact/sequelize-tool
 ```
 
-## API
+## 功能
 
 ### filterSeqWhereObj
 
-Filters the given object by removing properties with falsy values. If the property value is an object, it also removes properties with falsy values within that object.
+用于过滤对象中的属性，移除所有值为假值（false）的属性。如果属性值是一个对象，它也会递归地移除该对象中的假值属性。
 
-#### Usage
+#### 使用方法
 
 ```typescript
 import { filterSeqWhereObj } from '@sellerartifact/sequelize-tool';
@@ -35,19 +33,15 @@ const obj = {
 };
 
 const filteredObj = filterSeqWhereObj(obj);
-console.log(filteredObj); // output: { a: 1, c: { d: 0, f: 'hello' } }
+console.log(filteredObj); // 输出: { a: 1, c: { d: 0, f: 'hello' } }
 
 ```
 
 ### renderField
 
-Renders a field condition based on the provided parameters.
+根据提供的参数渲染字段条件。支持多种类型的字段条件，包括模糊查询、时间范围、区间、左边界大于等于、左边界小于等于和范围查询。
 
-- field - The field name.
-- value - The field value.
-- type - The type of field condition (optional). "fuzzy" | "time" | "section" | "leftGreaterEqual" | "leftLessEqual" | "range" | "";
-
-#### Usage
+#### 使用方法
 
 ```typescript
 import { renderField, FieldConditionType } from '@sellerartifact/sequelize-tool';
@@ -74,10 +68,10 @@ renderField("a", undefined); // "1=1"
 
 ### renderTotalSql
 
-Renders the total SQL query by replacing the SELECT clause with a COUNT(*) clause.
+用于将原始 SQL 查询中的 SELECT 子句替换为 COUNT(*) 子句，从而生成一个用于统计总数的 SQL 查询。
 
 
-#### Usage
+#### 使用方法
 
 ```typescript
 import { renderTotalSql } from '@sellerartifact/sequelize-tool';
@@ -88,9 +82,9 @@ console.log(totalSql); // 输出: "SELECT COUNT(*) AS COUNT FROM users WHERE age
 ```
 
 
-# Contributing
+# 贡献
 
-Welcome to submit questions and pull requests. If you have any suggestions or discover bugs, please submit an issue on GitHub.
+欢迎提交问题和拉取请求。如果您有任何建议或发现了 bug，请在 GitHub 上提交 issue。
 
 # License
 
